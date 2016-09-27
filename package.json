@@ -16,8 +16,10 @@
     ]
   },
   "scripts": {
-    "dev": "npm run build-container & npm run serve & watchify $npm_package_config_browserify",
+    "start": "npm run serve",
+    "dev": "npm run build-container & npm run serve & watchify $npm_package_config_browserify --full-paths",
     "dist": "NODE_ENV=production browserify $npm_package_config_browserify",
+    "discify": "browserify $npm_package_config_browserify --full-paths && discify public/dist/index.js -O",
     "serve": "st -d public -i index",
     "build": "babel-node scripts/build",
     "build-container": "babel-node scripts/build-container --title 'React Static Site' > public/index",
@@ -45,6 +47,7 @@
     "babelify": "^7.3.0",
     "basename": "^0.1.2",
     "browserify": "^13.1.0",
+    "disc": "^1.3.2",
     "minimist": "^1.2.0",
     "st": "^1.2.0",
     "watchify": "^3.7.0"
