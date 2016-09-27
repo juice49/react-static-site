@@ -14,7 +14,7 @@ const Layout = ({ children }) => (
 
 const styles = StyleSheet.create({
   container: {
-    fontFamily: '-apple-system'
+    fontFamily: '-apple-system, BlinkMacSystemFont'
   }
 })
 
