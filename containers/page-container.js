@@ -1,15 +1,10 @@
 import React from 'react'
 import getDisplayName from 'react-display-name'
-import fetch from 'isomorphic-fetch'
 import Markdown from 'react-markdown'
-import frontMatter from 'front-matter'
+import config from '../config'
+import loadContent from '../lib/load-content'
+import AnchorRouterLink from '../components/anchor-router-link'
 import Layout from '../themes/default/components/layout'
-
-const config = {
-  paths: {
-    content: 'content'
-  }
-}
 
 const initialState = {
   content: '',
@@ -18,7 +13,7 @@ const initialState = {
   tags: []
 }
 
-const pageContainer = Component => class extends React.Component {
+const pageContainer = (Component, props) => class extends React.Component {
 
   static get displayName () {
     return `PageContainer(${getDisplayName(Component)})`
@@ -34,30 +29,13 @@ const pageContainer = Component => class extends React.Component {
     this.loadContent(this.props.params.slug)
   }
 
-  loadContent (slug = 'index') {
-
-    const { state } = this
-    const url = `${config.paths.content}/${slug}.md` // TODO: Support HTML and React components
-
-    fetch(url)
-      .then(res => res.text())
-      .then(content => {
-        const { body, attributes } = frontMatter(content)
-        console.log('parse', attributes)
-        this.setState({
-          content: body,
-          title: attributes.title,
-          tags: attributes.tags || initialState.tags,
-          date: attributes.date
-        })
-      })
-      .catch(console.error) // xxx
-
+  loadContent (slug) {
+    loadContent(config.paths.content, slug)
+      .then(this.setState.bind(this))
   }
 
   render () {
-
-    const { title, date, tags, content } = this.state
+    const { title, date, tags, content } = props.__staticContent || this.state
 
     return (
       <Component
@@ -66,10 +44,11 @@ const pageContainer = Component => class extends React.Component {
         title={title}
         date={date}
         tags={tags}>
-        <Markdown source={content} />
+        <Markdown
+          source={content}
+          renderers={{ Link: AnchorRouterLink }} />
       </Component>
     )
-
   }
 
 }

@@ -1,0 +1,6 @@
+<!DOCTYPE html>
+  <title>React Static Site</title>
+  <style data-aphrodite>.container_1wtftbl{background-color:red;}</style>
+  <div id='app'><div><div data-reactroot="" data-reactid="1" data-react-checksum="-178086630"><!-- react-empty: 2 --><div class="container_1wtftbl" data-reactid="3"><h1 data-reactid="4">React SSSSStatic Site</h1><a href="/" class="" data-reactid="5">Home</a><section data-reactid="6"><h1 data-reactid="7">Hello</h1><span data-reactid="8">24-09-16 21:03</span><ul data-reactid="9"><li data-reactid="10">foo</li></ul><div data-reactid="11"><p data-reactid="12"><!-- react-text: 13 -->Hello, I am foo.<!-- /react-text --></p></div></section></div></div></div></div>
+  <script>window.css = ["container_1wtftbl"]</script>
+  <script src='/dist/index.js'></script>

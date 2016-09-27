@@ -16,15 +16,19 @@
     ]
   },
   "scripts": {
-    "dev": "npm run serve & watchify $npm_package_config_browserify",
+    "dev": "npm run build-container & npm run serve & watchify $npm_package_config_browserify",
     "dist": "NODE_ENV=production browserify $npm_package_config_browserify",
-    "serve": "list public -s",
+    "serve": "st -d public -i index",
+    "build": "babel-node scripts/build",
+    "build-container": "babel-node scripts/build-container --title 'React Static Site' > public/index",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Ash",
   "license": "ISC",
   "dependencies": {
+    "aphrodite": "^0.5.0",
     "dateformat": "^1.0.12",
+    "detect-node": "^2.0.3",
     "front-matter": "^2.1.0",
     "isomorphic-fetch": "^2.2.1",
     "react": "^15.3.1",
@@ -34,12 +38,15 @@
     "react-router": "^4.0.0-alpha.3"
   },
   "devDependencies": {
+    "babel-cli": "^6.14.0",
     "babel-plugin-transform-object-rest-spread": "^6.8.0",
     "babel-plugin-transform-react-jsx": "^6.8.0",
     "babel-preset-es2015": "^6.14.0",
     "babelify": "^7.3.0",
+    "basename": "^0.1.2",
     "browserify": "^13.1.0",
-    "micro-list": "^0.7.0",
+    "minimist": "^1.2.0",
+    "st": "^1.2.0",
     "watchify": "^3.7.0"
   }
 }

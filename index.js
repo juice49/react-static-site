@@ -3,19 +3,16 @@
 import React from 'react'
 import { render } from 'react-dom'
 import Router from 'react-router/BrowserRouter'
-import Match from 'react-router/Match'
-import Page from './themes/default/components/page'
-import pageContainer from './containers/page-container'
+import { StyleSheet } from 'aphrodite/no-important'
+import App from './components/app'
 
-const PageComponent = pageContainer(Page)
+if (window.css) {
+  StyleSheet.rehydrate(window.css)
+}
 
-const App = () => (
+render(
   <Router>
-    <div>
-      <Match exactly pattern='/' component={PageComponent} />
-      <Match pattern='/:slug' component={PageComponent} />
-    </div>
-  </Router>
+    <App />
+  </Router>,
+  document.getElementById('app')
 )
-
-render(<App />, document.getElementById('app'))

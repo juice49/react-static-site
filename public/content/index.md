@@ -7,6 +7,7 @@ tags:
 ---
 Lorem ipsum dolor sit amet.
 
-- Foo.
+- [Foo](/foo).
+- [BBC News](http://news.bbc.co.uk).
 - Bar.
 - Bat.
