@@ -15,6 +15,10 @@ import config from '../config'
 const publicPath = pathJoin(__dirname, '../', config.paths.public)
 const contentPath = pathJoin(publicPath, config.paths.content)
 
+/*const outputStructure = {
+  index:
+}*/
+
 const buildPage = slug =>
   loadContent(contentPath, slug)
     .then(content => renderPage(slug, content))
@@ -27,10 +31,10 @@ readdir(contentPath, (err, files) => {
     return
   }
 
-  files
+  /*files
     .map(file => ({ slug: basename(file), file }))
-    .filter(({ slug }) => slug !== 'index')
-    .forEach(({ slug }) => buildPage(slug))
+    //.filter(({ slug }) => slug !== 'index')
+    .forEach(({ slug }) => buildPage(slug))*/
 })
 
 buildPage()
