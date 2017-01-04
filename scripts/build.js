@@ -12,43 +12,35 @@ import loadContent from '../lib/load-content'
 import App from '../components/app'
 import config from '../config'
 
-const publicPath = pathJoin(__dirname, '../', config.paths.public)
-const contentPath = pathJoin(publicPath, config.paths.content)
+const publicPath = pathJoin(__dirname, '..', config.paths.public)
 
-/*const outputStructure = {
-  index:
-}*/
-
-const buildPage = slug =>
-  loadContent(contentPath, slug)
+const buildPage = (slug = 'index') =>
+  loadContent(pathJoin('..', config.paths.content), slug)
     .then(content => renderPage(slug, content))
     .then(content => writePage(slug, content))
     .catch(console.error)
 
-readdir(contentPath, (err, files) => {
+readdir(config.paths.content, (err, files) => {
   if (err) {
-    console.error('ohno', err)
+    console.error(`Couldn't read files`, err)
     return
   }
 
-  /*files
+  files
     .map(file => ({ slug: basename(file), file }))
-    //.filter(({ slug }) => slug !== 'index')
-    .forEach(({ slug }) => buildPage(slug))*/
+    .forEach(({ slug }) => buildPage(slug))
 })
-
-buildPage()
 
 function renderPage (slug, content) {
   const context = createServerRenderContext()
 
   const { html, css } = StyleSheetServer.renderStatic(() => render(
     <ServerRouter location={`/${slug}`} context={context}>
-      <App __staticContent={content} />
+      <App cache={{ [slug]: content }} />
     </ServerRouter>
   ))
 
-  const result = context.getResult()
+  // const result = context.getResult()
   return { ...content, html, css }
 }
 

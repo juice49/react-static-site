@@ -1,5 +1,16 @@
 # React Static Site
 
+**In my first attempt, the static site had only one build step: the JS. Other
+static site systems that aren't SPAs have a build step for content. I think
+we need both: one step that builds content and one that generates static
+HTML.**
+
+1) Parse content.
+2) Build content.
+3) Snapshot pages as static HTML.
+
+***
+
 For now, this is just me experimenting with using React to build a static site.
 
 I'd like to port my blog across to a React static site, and I'd like to learn

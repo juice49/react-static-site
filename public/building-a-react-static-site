@@ -1,8 +1,0 @@
-<!DOCTYPE html>
-  <title>React Static Site</title>
-  <style data-aphrodite>.container_1wtftbl{background-color:red;}</style>
-  <div id='app'><div><div data-reactroot="" data-reactid="1" data-react-checksum="-554255265"><!-- react-empty: 2 --><div class="container_1wtftbl" data-reactid="3"><h1 data-reactid="4">React SSSSStatic Site</h1><a href="/" class="" data-reactid="5">Home</a><section data-reactid="6"><h1 data-reactid="7">Problems encountered building a static site with React</h1><span data-reactid="8">24-09-16 21:03</span><ul data-reactid="9"><li data-reactid="10">react</li><li data-reactid="11">static</li></ul><div data-reactid="12"><h2 data-reactid="13">Render to string is not async</h2><p data-reactid="14"><!-- react-text: 15 -->Data fetching has to be handled outside of the component as well.<!-- /react-text --></p><h2 data-reactid="16">Double rendering</h2><p data-reactid="17"><!-- react-text: 18 -->The client rendered doesn&#x27;t know if it is attaching to a prerendered version
-of itself, meaning it fetches data again when it mounts.<!-- /react-text --></p><h2 data-reactid="19">Links in content are not automatically treated as Router links</h2><h2 data-reactid="20">Serving a SPA and static pages</h2><p data-reactid="21"><a href="https://npmjs.com/micro-list" data-reactid="22"><!-- react-text: 23 -->micro-list<!-- /react-text --></a><!-- react-text: 24 -->
-<!-- /react-text --><a href="https://npmjs.com/st" data-reactid="25"><!-- react-text: 26 -->st<!-- /react-text --></a></p></div></section></div></div></div></div>
-  <script>window.css = ["container_1wtftbl"]</script>
-  <script src='/dist/index.js'></script>

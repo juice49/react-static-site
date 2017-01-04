@@ -1,13 +1,11 @@
 import React from 'react'
 import getDisplayName from 'react-display-name'
-import Markdown from 'react-markdown'
 import config from '../config'
 import loadContent from '../lib/load-content'
-import AnchorRouterLink from '../components/anchor-router-link'
 import Layout from '../themes/default/components/layout'
 
-const initialState = {
-  content: '',
+const loadingState = {
+  component: () => <div>Loading&hellip;</div>,
   title: null,
   date: null,
   tags: []
@@ -21,21 +19,37 @@ const pageContainer = (Component, props) => class extends React.Component {
 
   constructor (props) {
     super(props)
-    this.state = initialState
     this.loadContent = this.loadContent.bind(this)
+    this.getSlug = this.getSlug.bind(this)
   }
 
   componentWillMount () {
-    this.loadContent(this.props.params.slug)
+    const cache = props.cache || {}
+    if (!cache[this.getSlug()]) {
+      this.loadContent(this.getSlug())
+    }
   }
 
   loadContent (slug) {
-    loadContent(config.paths.content, slug)
-      .then(this.setState.bind(this))
+    const { onLoadContent } = props
+
+    loadContent(`${config.paths.dist}/content`, slug)
+      .then(content => onLoadContent(slug, content))
+  }
+
+  getSlug () {
+    return this.props.params.slug || 'index'
   }
 
   render () {
-    const { title, date, tags, content } = props.__staticContent || this.state
+    const cache = props.cache || {}
+
+    const {
+      component: PageComponent,
+      title,
+      date,
+      tags
+    } = cache[this.getSlug()] || loadingState
 
     return (
       <Component
@@ -44,9 +58,7 @@ const pageContainer = (Component, props) => class extends React.Component {
         title={title}
         date={date}
         tags={tags}>
-        <Markdown
-          source={content}
-          renderers={{ Link: AnchorRouterLink }} />
+        <PageComponent />
       </Component>
     )
   }
